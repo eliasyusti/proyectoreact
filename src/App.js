@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+function Helloworld(props){
+  return(
+    <div id ="hello">
+    <h2>{props.subtitulo}</h2>
+    {props.mitexto}
+    </div>  );
+}
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>este es mi componente: 
+      <Helloworld mitexto="hola elias" subtitulo="yusti"/>
+      <Helloworld mitexto="hola pablo" subtitulo="puerta"/></div>
   );
 }
 
