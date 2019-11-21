@@ -20,18 +20,17 @@ export default class CrearFruta extends Component {
     //crear una nueva fruta
 
 
-    onSubmit = (e) => {
-        console.log(this.setState.nombre, this.setState.descripcion)
-        e.preventDefault();
-        
+    onSubmit = async (e) => {
 
         const nuevaFruta = {
 
             nombre: this.state.nombre,
             descripcion: this.state.descripcion
-        }
-        console.log(nuevaFruta)
-    } 
+        };
+        await axios.post('http://localhost:3000/api/frutas', nuevaFruta);
+        window.location.href = '/';
+    }
+    
 
     onInputChange = e => {
         e.preventDefault();
@@ -48,7 +47,7 @@ export default class CrearFruta extends Component {
         return (
             <div className="row">
 
-                <div className="col-md-6 offset-md-3">
+                <div className="col-md-6 offset-md-3 col-md-1">
 
                     <div className="card card-body">
                         <h4>Crear Fruta</h4>
@@ -75,7 +74,9 @@ export default class CrearFruta extends Component {
 
                             </textarea>
                         </div>
-                        <div>
+
+                        <div className="col-md-9">
+
                         <form onSubmit={this.onSubmit}>
 
                             <button type="submit" className="btn btn-primary">
@@ -85,6 +86,7 @@ export default class CrearFruta extends Component {
                             </button>
 
                         </form>
+
                         </div>
 
                     </div>
