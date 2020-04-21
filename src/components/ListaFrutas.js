@@ -21,7 +21,7 @@ export default class ListaFrutas extends Component {
     async getFrutas(e){
         
         const res = await axios.get('http://localhost:3000/api/frutas');
-        this.setState({frutas: res.data})
+        this.setState({frutas: res.data, frutasFiltradas: res.data})
     }
 
     eliminarFruta = async (id) => {
@@ -41,13 +41,23 @@ export default class ListaFrutas extends Component {
             const nombreData = fruta.nombre.toUpperCase()
             const textData = text.toUpperCase()
             return nombreData.indexOf(textData) > -1
+
         
         } );
 
+      
+        if(text === null || text === ""){
+            this.getFrutas();
+            return 
+        }
+
         this.setState({
-            frutas: fruitsFilter,
+            frutasFiltradas: fruitsFilter,
             text: text,
         })
+
+        console.log(text)
+
 
     } 
 
@@ -55,11 +65,11 @@ export default class ListaFrutas extends Component {
 
     render() {
         return (
-            <div className="row" >
+            <div className="container" >
                 <form >
                     <input 
 
-                    className="form-control mr-sm-2" 
+                    className="form-control col-md-2" 
                     value = {this.state.buscar}
                     onSubmit = {this.onSubmit}
                     onChange={this.onInputChange}
@@ -69,15 +79,11 @@ export default class ListaFrutas extends Component {
                     
                     />
                     
-                    <button className="btn btn-primary justify-content-between">
-                                       Buscar
-                                    </button>
-                    
                     </form>
                     
                     
                 {
-                    this.state.frutas.map(fruta => (
+                    this.state.frutasFiltradas.map(fruta => (
 
                         <div className="col-md-6 offset-md-3 p-3" key={fruta._id}>
                             <div className="card" onDoubleClick={() => this.eliminarFruta(fruta._id)}>
