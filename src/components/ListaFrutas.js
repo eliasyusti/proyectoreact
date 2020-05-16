@@ -10,7 +10,8 @@ export default class ListaFrutas extends Component {
 
         frutas:[],
         frutaAbuscar: '',
-        frutasFiltradas:[]
+        frutasFiltradas:[],
+        _id:""
     }
 
     componentDidMount(){
@@ -19,8 +20,15 @@ export default class ListaFrutas extends Component {
     }
 
     async getFrutas(e){
+
         
-        const res = await axios.get('http://localhost:3000/api/frutas');
+        
+        const res = await axios({
+            method: 'get',
+            url: 'http://localhost:3000/api/frutas',
+            headers: {'authorization': 'Bearer ' + localStorage.token}
+       })
+       console.log(res)
         this.setState({frutas: res.data, frutasFiltradas: res.data})
     }
 
@@ -85,7 +93,7 @@ export default class ListaFrutas extends Component {
                 {
                     this.state.frutasFiltradas.map(fruta => (
 
-                        <div className="col-md-6 offset-md-3 p-3" key={fruta._id}>
+                        <div className="col-md-6 offset-md-3 p-2" key={fruta._id}>
                             <div className="card" onDoubleClick={() => this.eliminarFruta(fruta._id)}>
                                 <div className="card-header d-flex justify-content-between">
                                         <h5>{fruta.nombre}</h5>

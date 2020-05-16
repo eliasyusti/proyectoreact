@@ -14,9 +14,9 @@ export default class CrearFruta extends Component {
 
     async componentDidMount() {
         
-        const res = await axios.get('http://localhost:3000/api/frutas');
+        const res = await axios.get('http://localhost:3000/api/frutas/');
         console.log(res.data)
-
+        
         if(this.props.match.params){
             const res = await axios.get('http://localhost:3000/api/frutas/' + this.props.match.params.id);
             this.setState({
@@ -24,6 +24,7 @@ export default class CrearFruta extends Component {
                 descripcion: res.data.descripcion,
                 editar: true,
                 _id: this.props.match.params.id
+                
             })
         }
         
@@ -46,7 +47,14 @@ export default class CrearFruta extends Component {
 
         } else{
 
-            await axios.post('http://localhost:3000/api/frutas/', nuevaFruta);
+            await axios({
+                method: 'post',
+                url: 'http://localhost:3000/api/frutas',
+                data: nuevaFruta,
+                headers: {'authorization': 'Bearer ' + localStorage.token}
+           })
+
+            
         }
         
         window.location.href = '/'
@@ -70,7 +78,8 @@ export default class CrearFruta extends Component {
 
                 <div className="col-md-6 offset-md-3">
 
-                    <div className="card card-body">
+                    <div className="card card-body"
+                     style={{marginTop:'50px'}}>
                         <h4>Crear Fruta</h4>
 
                         {/** crear nombre de la fruta*/}
