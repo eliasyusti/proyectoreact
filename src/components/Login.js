@@ -28,10 +28,13 @@ export default class Login extends Component {
                 console.log(res)
                 let token = res.data.token;
                 const rol = loguear.rol;
+                const _id = res.data.user._id;
                 console.log(token);
                 console.log(rol);
+                console.log(_id)
                 localStorage.setItem('token', token);
                 localStorage.setItem('rol', rol);
+                localStorage.setItem('_id', _id);
                 if (res.status === 200) {
                     alert("Se a logueado con exito")
                     window.location.href = '/'

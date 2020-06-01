@@ -7,6 +7,7 @@ export default class CrearFruta extends Component {
 
         nombre:"",
         descripcion:"",
+        user:"",
         editar: false,
         _id: ""
     }
@@ -14,7 +15,11 @@ export default class CrearFruta extends Component {
 
     async componentDidMount() {
         
-        const res = await axios.get('http://localhost:3000/api/frutas/');
+        const res = await axios({
+            method: 'get',
+            url: 'http://localhost:3000/api/frutas',
+            headers: {'authorization': 'Bearer ' + localStorage.token}
+       })
         console.log(res.data)
         
         if(this.props.match.params){
@@ -47,9 +52,11 @@ export default class CrearFruta extends Component {
 
         } else{
 
+            const id = localStorage.getItem('_id');
+
             await axios({
                 method: 'post',
-                url: 'http://localhost:3000/api/frutas',
+                url: 'http://localhost:3000/api/frutas/create/' + id,
                 data: nuevaFruta,
                 headers: {'authorization': 'Bearer ' + localStorage.token}
            })

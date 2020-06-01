@@ -17,7 +17,11 @@ export default class ListaFrutas extends Component {
         frutas:[],
         frutaAbuscar: '',
         frutasFiltradas:[],
+<<<<<<< HEAD
         _id:""
+>>>>>>> develop
+=======
+        _id:"",
 >>>>>>> develop
     }
 
@@ -26,21 +30,24 @@ export default class ListaFrutas extends Component {
         this.getFrutas();
     }
 
+<<<<<<< HEAD
     async getFrutas(e){
 <<<<<<< HEAD
         
         const res = await axios.get('http://localhost:3000/api/frutas');
         this.setState({frutas: res.data})
 =======
+=======
+    async getFrutas(){
+>>>>>>> develop
 
-        
-        
+        const id = localStorage.getItem('_id');
         const res = await axios({
             method: 'get',
-            url: 'http://localhost:3000/api/frutas',
+            url: 'http://localhost:3000/api/frutas/' + id,
             headers: {'authorization': 'Bearer ' + localStorage.token}
-       })
-       console.log(res)
+       });
+       console.log(res.data)
         this.setState({frutas: res.data, frutasFiltradas: res.data})
 >>>>>>> develop
     }
@@ -112,8 +119,11 @@ export default class ListaFrutas extends Component {
                     </form>
                     
                     
+                    
                 {
                     this.state.frutasFiltradas.map(fruta => (
+
+                        
 
                         <div className="col-md-6 offset-md-3 p-2" key={fruta._id}>
 >>>>>>> develop
