@@ -1,28 +1,17 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-<<<<<<< HEAD
-=======
 import '../App.css'
 
->>>>>>> develop
 
 export default class ListaFrutas extends Component {
 
     state= {
 
-<<<<<<< HEAD
-        frutas:[]
-=======
         frutas:[],
         frutaAbuscar: '',
         frutasFiltradas:[],
-<<<<<<< HEAD
-        _id:""
->>>>>>> develop
-=======
         _id:"",
->>>>>>> develop
     }
 
     componentDidMount(){
@@ -30,16 +19,7 @@ export default class ListaFrutas extends Component {
         this.getFrutas();
     }
 
-<<<<<<< HEAD
-    async getFrutas(e){
-<<<<<<< HEAD
-        
-        const res = await axios.get('http://localhost:3000/api/frutas');
-        this.setState({frutas: res.data})
-=======
-=======
     async getFrutas(){
->>>>>>> develop
 
         const id = localStorage.getItem('_id');
         const res = await axios({
@@ -49,7 +29,6 @@ export default class ListaFrutas extends Component {
        });
        console.log(res.data)
         this.setState({frutas: res.data, frutasFiltradas: res.data})
->>>>>>> develop
     }
 
     eliminarFruta = async (id) => {
@@ -59,15 +38,6 @@ export default class ListaFrutas extends Component {
       
     }
 
-<<<<<<< HEAD
-    render() {
-        return (
-            <div className="row">
-                {
-                    this.state.frutas.map(fruta => (
-
-                        <div className="col-md-4 offset-md-1 p-3" key={fruta._id}>
-=======
     onInputChange = e => {
         e.preventDefault();
      
@@ -126,7 +96,9 @@ export default class ListaFrutas extends Component {
                         
 
                         <div className="col-md-6 offset-md-3 p-2" key={fruta._id}>
->>>>>>> develop
+                            <form >
+                    
+                    </form>
                             <div className="card" onDoubleClick={() => this.eliminarFruta(fruta._id)}>
                                 <div className="card-header d-flex justify-content-between">
                                         <h5>{fruta.nombre}</h5>
@@ -149,12 +121,9 @@ export default class ListaFrutas extends Component {
                         </div>
                     ))
                 }
-<<<<<<< HEAD
-=======
 
 
                  
->>>>>>> develop
             </div>
         )
     }
