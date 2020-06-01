@@ -11,7 +11,7 @@ export default class ListaFrutas extends Component {
         frutas:[],
         frutaAbuscar: '',
         frutasFiltradas:[],
-        _id:""
+        _id:"",
     }
 
     componentDidMount(){
@@ -19,16 +19,15 @@ export default class ListaFrutas extends Component {
         this.getFrutas();
     }
 
-    async getFrutas(e){
+    async getFrutas(){
 
-        
-        
+        const id = localStorage.getItem('_id');
         const res = await axios({
             method: 'get',
-            url: 'http://localhost:3000/api/frutas',
+            url: 'http://localhost:3000/api/frutas/' + id,
             headers: {'authorization': 'Bearer ' + localStorage.token}
-       })
-       console.log(res)
+       });
+       console.log(res.data)
         this.setState({frutas: res.data, frutasFiltradas: res.data})
     }
 
@@ -90,8 +89,11 @@ export default class ListaFrutas extends Component {
                     </form>
                     
                     
+                    
                 {
                     this.state.frutasFiltradas.map(fruta => (
+
+                        
 
                         <div className="col-md-6 offset-md-3 p-2" key={fruta._id}>
                             <div className="card" onDoubleClick={() => this.eliminarFruta(fruta._id)}>
